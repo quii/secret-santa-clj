@@ -3,13 +3,19 @@
             [secret-santa.core :refer :all]
             ))
 
+
+;; Possible property based tests
+;; Everyone should have a present!
+;; Everyone should give a present!
+;; It would be *nice* if the giver and receiver aren't a pair
+
 (deftest assign-secret-santas
   (testing "Secret santas get assigned"
-    (let [
+           (let [
           santas `(:a :b :c :d)
           expected {:a :b, :b :c, :c :d, :d :a}
           ]
-      (is (= expected (assign-santas santas)))))
+                (is (= expected (assign-giving-and-receiving santas)))))
   )
 
 (deftest render-secret-santas
@@ -19,7 +25,7 @@
                         expected '({:giver :a, :receiver :b},
                                     {:giver :c, :receiver :d})
                         ]
-                       (is (= expected (render-santas assigned-santas)))
+                       (is (= expected (render assigned-santas)))
                        )))
 
 (deftest load-santas

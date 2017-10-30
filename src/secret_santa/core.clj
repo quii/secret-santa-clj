@@ -1,33 +1,38 @@
 (ns secret-santa.core
-  (:gen-class))
+    (:gen-class))
 
 (require '[clojure.data.csv :as csv]
          '[clojure.java.io :as io])
 
 (defn get-santas-data [filename]
-  (with-open [reader (io/reader filename)]
-    (doall
-      (csv/read-csv reader)))
-  )
+      (with-open [reader (io/reader filename)]
+                 (doall
+                   (csv/read-csv reader)))
+      )
 
 (defn get-santas [filename]
-  (rest (map first (get-santas-data filename))))
+      (rest (map first (get-santas-data filename))))
 
 (defn shuffle-list [x]
       (take (count x) (rest (cycle x))))
 
-(defn assign-santas [santas]
-  (zipmap santas (shuffle-list santas)))
+(defn assign-giving-and-receiving [santas]
+      (zipmap santas (shuffle-list santas)))
 
-(defn render-santas [assignments]
+(defn render [assignments]
       (map (fn [[giver receiver]] {:giver giver :receiver receiver}) assignments))
 
-(defn app [] (render-santas (assign-santas (shuffle (get-santas "santas.csv")))))
+(defn app [args]
+      (->
+        (get-santas (first args))
+        assign-giving-and-receiving
+        render
+        ))
 
 (defn -main
-  "Secret santa time"
-  [& args]
-  (println (app)))
+      "Secret santa time"
+      [& args]
+      (println (app args)))
 
 
 
