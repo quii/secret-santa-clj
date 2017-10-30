@@ -19,7 +19,10 @@
 (defn assign-santas [santas]
   (zipmap santas (shuffle-list santas)))
 
-(defn app [] (assign-santas (shuffle (get-santas "santas.csv"))))
+(defn render-santas [assignments]
+      (map (fn [[giver receiver]] {:giver giver :receiver receiver}) assignments))
+
+(defn app [] (render-santas (assign-santas (shuffle (get-santas "santas.csv")))))
 
 (defn -main
   "Secret santa time"

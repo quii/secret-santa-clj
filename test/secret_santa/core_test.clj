@@ -3,7 +3,7 @@
             [secret-santa.core :refer :all]
             ))
 
-(deftest secret-santa
+(deftest assign-secret-santas
   (testing "Secret santas get assigned"
     (let [
           santas `(:a :b :c :d)
@@ -12,6 +12,15 @@
       (is (= expected (assign-santas santas)))))
   )
 
+(deftest render-secret-santas
+         (testing "Render secret santa infos nicely"
+                  (let [
+                        assigned-santas {:a :b, :c :d}
+                        expected '({:giver :a, :receiver :b},
+                                    {:giver :c, :receiver :d})
+                        ]
+                       (is (= expected (render-santas assigned-santas)))
+                       )))
 
 (deftest load-santas
   (testing "Can load santas from csv"
