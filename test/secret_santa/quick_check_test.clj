@@ -7,15 +7,28 @@
             [clojure.test.check.properties :as prop]
             ))
 
-(defn check-santa-gives-once [assignments santa]
-  (= 1 (count
-         (filter #(= (first %) santa) assignments))))
+(defn get-givers [givers-and-receivers] (map first givers-and-receivers))
+(defn get-receivers [givers-and-receivers] (map second givers-and-receivers))
 
-(def every-santa-gives-once
-  (prop/for-all [santas (gen/vector gen/string)]
+(defn check-santas-appear-once [original-santas assigned-santas]
+  (let [frequencies (frequencies assigned-santas)
+        appeared-once (every? #(= 1 %) (map val frequencies))
+        all-appeared (= (set assigned-santas) (set original-santas))
+        ]
+      (and all-appeared appeared-once)
+    ))
+
+(def every-santa-gives-and-receives-once
+  (prop/for-all [santas (gen/vector gen/int)]
                 (let [assignments (assign-giving-and-receiving santas)
-                      santa-gives-once (fn [santa] (check-santa-gives-once assignments santa))]
-                  (every? true? (map santa-gives-once santas)))
+                      givers (get-givers assignments)
+                      receivers (get-receivers assignments)
+                      ]
+                  (true? (check-santas-appear-once santas givers))
+                  (true? (check-santas-appear-once santas receivers))
+                  )
                 ))
 
-(defspec santa-gives-once 100 every-santa-gives-once)
+
+
+(defspec santa-gives-once 100 every-santa-gives-and-receives-once)
