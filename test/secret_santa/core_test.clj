@@ -29,3 +29,10 @@
     (let [filename "santas.csv"
           expectedSantas '("ruth@gmail.com", "simone@gmail.com", "jayne@gmail.com")]
       (is (= expectedSantas (get-santas filename))))))
+
+(deftest create-email-message
+  (testing "Can create an email payload"
+    (let [giver-and-receiver {:giver "cj@gmail.com" :receiver "rb@gmail.com"}]
+      (is (=
+            {:to "cj@gmail.com" :from from :subject subject :body "Please get a lovely gift for rb@gmail.com"}
+            (create-email giver-and-receiver))))))
