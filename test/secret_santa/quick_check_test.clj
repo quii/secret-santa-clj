@@ -11,8 +11,7 @@
 (defn get-receivers [givers-and-receivers] (map second givers-and-receivers))
 
 (defn check-santas-appear-once [original-santas assigned-santas]
-  (let [frequencies (frequencies assigned-santas)
-        appeared-once (every? #(= 1 %) (map val frequencies))
+  (let [appeared-once (distinct? assigned-santas)
         all-appeared (= (set assigned-santas) (set original-santas))
         ]
       (and all-appeared appeared-once)

@@ -17,7 +17,8 @@
       (take (count x) (rest (cycle x))))
 
 (defn assign-giving-and-receiving [santas]
-      (zipmap santas (shuffle-list santas)))
+  (let [unique-santas (distinct santas)]
+    (zipmap unique-santas (shuffle-list unique-santas))))
 
 (defn render [assignments]
       (map (fn [[giver receiver]] {:giver giver :receiver receiver}) assignments))
