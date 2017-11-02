@@ -27,8 +27,7 @@
       (->
         (get-santas (first args))
         assign-giving-and-receiving
-        render
-        ))
+        render))
 
 (defn -main
       "Secret santa time"
