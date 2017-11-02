@@ -11,7 +11,7 @@
           expected {:a :b, :b :c, :c :d, :d :a}]
       (is (= expected (assign-giving-and-receiving santas))))
     )
-  (testing "what"
+  (testing "duplicated santas are removed"
     (let [duplicated-santas [:a :a :b :a]
           expected {:a :b, :b :a}]
       (is (= expected (assign-giving-and-receiving duplicated-santas)))

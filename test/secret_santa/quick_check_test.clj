@@ -10,7 +10,7 @@
 (defn check-santas-appear-once [original-santas assigned-santas]
   (let [appeared-once (distinct? assigned-santas)
         all-appeared (= (set assigned-santas) (set original-santas))]
-      (and all-appeared appeared-once)
+    (and all-appeared appeared-once)
     ))
 
 (def every-santa-gives-and-receives-once
