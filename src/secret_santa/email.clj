@@ -18,11 +18,12 @@
 
 (defn create-emails [santas] (map create-email santas))
 
-(defn load-config []
-  (with-open [r (io/reader "conf.clj")]
+(defn load-config [path]
+  (with-open [r (io/reader path)]
     (read (PushbackReader. r))))
 
-(def google-deets (merge (load-config) {:ssl true}))
+(defn google-deets [path]
+  (merge (load-config "conf.clj") {:ssl true}))
 
 (defn send-email [email]
   (send-message google-deets email))
