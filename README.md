@@ -1,36 +1,24 @@
 # secret-santa
 
-FIXME: description
+Takes a CSV file of email addresses and emails them whoever they need to give a gift to
 
-## Installation
+## to run
 
-Download from http://example.com/FIXME.
+`lein run santas.csv`
 
-## Usage
+You will need a `config.clj` that looks roughly like this
 
-FIXME: explanation
+````$clojure
+{:host "smtp.gmail.com"
+ :user "youremail@gmail.com"
+ :pass "your password"}
+````
 
-    $ java -jar secret-santa-0.1.0-standalone.jar [args]
+And your CSV file should look something like 
 
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2017 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+````$csv
+names,
+santa1@gmail.com
+santa2@gmail.com
+santa3@gmail.com
+````

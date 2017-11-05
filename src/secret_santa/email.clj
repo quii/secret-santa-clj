@@ -1,4 +1,6 @@
-(ns secret-santa.email)
+(ns secret-santa.email
+  (:require [clojure.java.io :as io])
+  (:import (java.io PushbackReader)))
 
 (require
   '[postal.core :refer :all]
@@ -16,7 +18,11 @@
 
 (defn create-emails [santas] (map create-email santas))
 
-(def google-deets {:host "smtp.gmail.com" :user "supersecretsanta84@gmail.com" :pass "xxx" :ssl true})
+(defn load-config []
+  (with-open [r (io/reader "conf.clj")]
+    (read (PushbackReader. r))))
+
+(def google-deets (merge (load-config) {:ssl true}))
 
 (defn send-email [email]
   (send-message google-deets email))

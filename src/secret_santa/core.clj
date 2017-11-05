@@ -38,13 +38,4 @@
   [& args]
   (println (app args)))
 
-;(defn -main
-;  "Secret santa time"
-;  [& args]
-;  (->
-;    {:giver "ruthmoog@gmail.com" :receiver "qui666@gmail.com"}
-;    create-email
-;    send-email))
-
-
 
