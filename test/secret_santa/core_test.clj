@@ -1,8 +1,6 @@
 (ns secret-santa.core-test
   (:require [clojure.test :refer :all]
-            [secret-santa.core :refer :all]
-            [secret-santa.email :refer :all]
-            ))
+            [secret-santa.core :refer :all]))
 
 (deftest assign-secret-santas
 
@@ -28,10 +26,3 @@
     (let [filename "santas.csv"
           expectedSantas '("qui666+santa1@gmail.com", "qui666+santa2@gmail.com", "qui666+santa3@gmail.com")]
       (is (= expectedSantas (get-santas filename))))))
-
-(deftest create-email-message
-  (testing "Can create an email payload"
-    (let [giver-and-receiver {:giver "cj@gmail.com" :receiver "rb@gmail.com"}]
-      (is (=
-            {:to "cj@gmail.com" :from from :subject subject :body "Please get a lovely gift for rb@gmail.com - the budget is £20"}
-            (create-email giver-and-receiver))))))
