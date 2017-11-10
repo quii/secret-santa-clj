@@ -15,7 +15,7 @@
   (rest (map first (get-santas-data filename))))
 
 (defn shuffle-list [x]
-  (take (count x) (rest (cycle x))))
+  (cons (last x) (butlast x)))
 
 (defn assign-giving-and-receiving [santas]
   (let [unique-santas (distinct santas)]

@@ -6,7 +6,7 @@
 
   (testing "Secret santas get assigned"
     (let [santas `(:a :b :c :d)
-          expected {:a :b, :b :c, :c :d, :d :a}]
+          expected {:a :d, :b :a, :c :b, :d :c}]
       (is (= expected (assign-giving-and-receiving santas)))))
 
   (testing "duplicated santas are removed"
