@@ -1,9 +1,8 @@
 (ns secret-santa.core
+  (:require [clojure.data.csv :as csv]
+            [clojure.java.io :as io]
+            [secret-santa.email :refer [create-emails send-emails]])
   (:gen-class))
-
-(require '[clojure.data.csv :as csv]
-         '[clojure.java.io :as io]
-         '[secret-santa.email :refer [create-emails send-emails]])
 
 (defn get-santas-data [filename]
   (with-open [reader (io/reader filename)]
